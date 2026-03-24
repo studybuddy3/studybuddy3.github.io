@@ -42,30 +42,3 @@
 
 </body>
 </html>
-<script>
-document.getElementById('openBtn').onclick = function () {
-    let url = document.getElementById('urlInput').value;
-
-    if (!url) {
-        alert("Please enter a URL");
-        return;
-    }
-
-    let win = window.open("about:blank", "_blank");
-
-    if (!win) {
-        alert("Popup blocked!");
-        return;
-    }
-
-    win.document.write(`
-        <html>
-            <body style="margin:0">
-                <iframe src="${url}" style="border:none;width:100%;height:100%"></iframe>
-            </body>
-        </html>
-    `);
-
-    win.document.close();
-};
-</script>
