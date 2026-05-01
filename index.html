@@ -49,6 +49,73 @@
         }
     </script>
 
+<head>
+  <title>Better Blober</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      width: 300px;
+      padding: 8px;
+      font-size: 14px;
+    }
+    button {
+      padding: 8px 12px;
+      font-size: 14px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Open URL in Blob Iframe</h2>
+
+<input type="text" id="urlInput" placeholder="Enter URL ( Example https://azgames.io)" />
+<button onclick="openBlobIframe()">Open</button>
+
+<script>
+function openBlobIframe() {
+  let url = document.getElementById('urlInput').value.trim();
+
+  // Add https://azgames.io if missing
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url;
+  }
+
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Blob Iframe</title>
+      <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+        }
+        iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+      </style>
+    </head>
+    <body>
+      <iframe src="${url}"></iframe>
+    </body>
+    </html>
+  `;
+
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const blobUrl = URL.createObjectURL(blob);
+
+  window.open(blobUrl, '_blank');
+}
+</script>
+
 </body>
 </html>
 <h2>
